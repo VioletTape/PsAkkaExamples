@@ -18,13 +18,20 @@ namespace SampleActor {
 
             Console.ReadLine();
 
+            Console.WriteLine("Actor System terminating...");
             ms.Terminate();
+            ms.WhenTerminated.Wait();
+
+            Console.WriteLine("Actor System terminated");
         }
 
         private static void RecievedActorUsage(ActorSystem actorSystem) {
             var actor = actorSystem.ActorOf<PlaybackActorTyped>("PlaybackActorTyped");
 
             actor.Tell(new PlayMovieMessage(42, "Batman"));
+            actor.Tell(new PlayMovieMessage(4, "Superman"));
+            actor.Tell(new PlayMovieMessage(6, "Terminator 2"));
+            actor.Tell(new PlayMovieMessage(32, "Predator"));
         }
 
         private static void UntypedActorUsage(ActorSystem actorSystem) {

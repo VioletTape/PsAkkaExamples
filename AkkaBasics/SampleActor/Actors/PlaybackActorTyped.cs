@@ -11,5 +11,14 @@ namespace SampleActor.Actors {
         private void Handle(PlayMovieMessage message) {
             Console.WriteLine(message);
         }
+
+        protected override void PreStart() {
+            Console.WriteLine(">>> PreStart hook");
+        }
+
+        protected override void PostStop() {
+            Console.WriteLine(">>> PostStop hook");
+
+        }
     }
 }
