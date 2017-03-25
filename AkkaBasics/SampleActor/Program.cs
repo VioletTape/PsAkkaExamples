@@ -1,6 +1,7 @@
 ﻿using System;
 using Akka.Actor;
 using SampleActor.Actors;
+using SampleActor.Messages;
 
 namespace SampleActor {
     internal class Program {
@@ -19,6 +20,9 @@ namespace SampleActor {
 
             // creating of new actor with specific properties
             var playbackActor = ms.ActorOf(props, "PlaybackActor");
+
+            // fire and foreget for complex types
+            playbackActor.Tell(new PlayMovieMessage(42, "Batman"));
 
             // fire and forget way of sending data
             playbackActor.Tell("Batman is the best!");
