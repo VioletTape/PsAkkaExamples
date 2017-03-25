@@ -8,7 +8,9 @@ namespace SampleActor.Actors {
         }
 
         protected override void OnReceive(object message) {
-            
+            if (message is string) Console.WriteLine("The movie is " + message);
+            else if (message is int) Console.WriteLine("some id is " + message);
+            else Unhandled(message);
         }
     }
 }
