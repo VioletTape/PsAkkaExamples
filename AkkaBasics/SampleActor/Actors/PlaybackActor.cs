@@ -3,6 +3,7 @@ using Akka.Actor;
 using SampleActor.Messages;
 
 namespace SampleActor.Actors {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class PlaybackActor : UntypedActor {
         public PlaybackActor() {
             Console.WriteLine("Hello from playback actor!");
