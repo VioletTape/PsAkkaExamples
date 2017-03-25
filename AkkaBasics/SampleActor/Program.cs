@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using Akka.Actor;
+using Akka.Configuration;
 using SampleActor.Actors;
 
 namespace SampleActor {
@@ -7,8 +9,11 @@ namespace SampleActor {
         private static ActorSystem MovieStreamingActorSystem;
 
         private static void Main(string[] args) {
+            var section = ConfigurationManager.GetSection("akka");
+            
             MovieStreamingActorSystem = ActorSystem.Create("MovieStreamingSystem");
             var ms = MovieStreamingActorSystem;
+
             Console.WriteLine("Actor system was created");
 
             var props = Props.Create<PlaybackActor>();
