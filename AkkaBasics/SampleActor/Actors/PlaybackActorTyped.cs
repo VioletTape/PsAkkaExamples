@@ -18,7 +18,21 @@ namespace SampleActor.Actors {
 
         protected override void PostStop() {
             Console.WriteLine(">>> PostStop hook");
+        }
 
+        protected override void PreRestart(Exception reason, object message) {
+            Console.WriteLine(">>> PreRestart hook");
+            Console.WriteLine(">>> " + reason.Message);
+
+
+            base.PreRestart(reason, message);
+        }
+
+        protected override void PostRestart(Exception reason) {
+            Console.WriteLine(">>> PostRestart hook");
+            Console.WriteLine(">>> " + reason.Message);
+
+            base.PostRestart(reason);
         }
     }
 }

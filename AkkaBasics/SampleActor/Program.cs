@@ -32,6 +32,9 @@ namespace SampleActor {
             actor.Tell(new PlayMovieMessage(4, "Superman"));
             actor.Tell(new PlayMovieMessage(6, "Terminator 2"));
             actor.Tell(new PlayMovieMessage(32, "Predator"));
+
+            // Terminate actor in a soft way, let him to process all recieved messages
+            actor.Tell(PoisonPill.Instance);
         }
 
         private static void UntypedActorUsage(ActorSystem actorSystem) {
