@@ -14,7 +14,7 @@ namespace SampleActor {
 
             Console.WriteLine("Actor system was created");
 
-            Recieved2ActorUsage(ms);
+            UserActorRefactored2(ms);
 
             Console.ReadLine();
 
@@ -69,6 +69,61 @@ namespace SampleActor {
         /// </summary>
         /// <param name="actorSystem"></param>
         private static void Recieved2ActorUsage(ActorSystem actorSystem)
+        {
+            var actor = actorSystem.ActorOf<UserActor>("PlaybackActorTyped");
+
+            Console.ReadLine();
+            Console.WriteLine("Sending movie");
+            actor.Tell(new PlayMovieMessage(42, "Batman"));
+            Console.ReadLine();
+            Console.WriteLine("Sending another movie");
+            actor.Tell(new PlayMovieMessage(6, "Terminator 2"));
+
+            Console.ReadLine();
+            Console.WriteLine("Stoping movie");
+            actor.Tell(new StopMovieMessage());
+            Console.ReadLine();
+            Console.WriteLine("Stoping another movie");
+            actor.Tell(new StopMovieMessage());
+
+            // Terminate actor in a soft way, let him to process all recieved messages
+            actor.Tell(PoisonPill.Instance);
+        }
+
+        /// <summary>
+        /// Step 4.1 Normal switching
+        /// </summary>
+        /// <param name="actorSystem"></param>
+        private static void UserActorRefactored1(ActorSystem actorSystem)
+        {
+            var actor = actorSystem.ActorOf<UserActor>("PlaybackActorTyped");
+
+            Console.ReadLine();
+            Console.WriteLine("Sending movie");
+            actor.Tell(new PlayMovieMessage(42, "Batman"));
+            
+
+            Console.ReadLine();
+            Console.WriteLine("Stoping movie");
+            actor.Tell(new StopMovieMessage());
+
+            Console.ReadLine();
+            Console.WriteLine("Sending another movie");
+            actor.Tell(new PlayMovieMessage(6, "Terminator 2"));
+
+            Console.ReadLine();
+            Console.WriteLine("Stoping another movie");
+            actor.Tell(new StopMovieMessage());
+
+            // Terminate actor in a soft way, let him to process all recieved messages
+            actor.Tell(PoisonPill.Instance);
+        }
+
+        /// <summary>
+        /// Step 4.2 Errors in the steps order
+        /// </summary>
+        /// <param name="actorSystem"></param>
+        private static void UserActorRefactored2(ActorSystem actorSystem)
         {
             var actor = actorSystem.ActorOf<UserActor>("PlaybackActorTyped");
 
