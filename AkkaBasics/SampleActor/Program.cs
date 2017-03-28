@@ -25,25 +25,7 @@ namespace SampleActor {
             Console.WriteLine("Actor System terminated");
         }
 
-        
-        /// <summary>
-        /// Step 2
-        /// </summary>
-        /// <param name="actorSystem"></param>
-        private static void RecievedActorUsage(ActorSystem actorSystem) {
-            var actor = actorSystem.ActorOf<PlaybackActorTyped>("PlaybackActorTyped");
 
-            actor.Tell(new PlayMovieMessage(42, "Batman"));
-            actor.Tell(new PlayMovieMessage(4, "Superman"));
-            actor.Tell(new PlayMovieMessage(6, "Terminator 2"));
-            actor.Tell(new PlayMovieMessage(32, "Predator"));
-
-            // Terminate actor in a soft way, let him to process all recieved messages
-            actor.Tell(PoisonPill.Instance);
-        }
-
-
-        
         /// <summary>
         /// Step 1
         /// </summary>
@@ -63,6 +45,23 @@ namespace SampleActor {
             playbackActor.Tell("Batman is the best!");
             playbackActor.Tell(42);
         }
+
+        /// <summary>
+        /// Step 2
+        /// </summary>
+        /// <param name="actorSystem"></param>
+        private static void RecievedActorUsage(ActorSystem actorSystem) {
+            var actor = actorSystem.ActorOf<PlaybackActorTyped>("PlaybackActorTyped");
+
+            actor.Tell(new PlayMovieMessage(42, "Batman"));
+            actor.Tell(new PlayMovieMessage(4, "Superman"));
+            actor.Tell(new PlayMovieMessage(6, "Terminator 2"));
+            actor.Tell(new PlayMovieMessage(32, "Predator"));
+
+            // Terminate actor in a soft way, let him to process all recieved messages
+            actor.Tell(PoisonPill.Instance);
+        }
+
 
         /// <summary>
         /// Step 3
