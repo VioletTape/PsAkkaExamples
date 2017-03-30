@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using Akka.Actor;
 using NLog;
+using SimpleHierarchyActors.Messages;
 
 namespace SimpleHierarchyActors.Actors {
     public class PlaybackStatisitcsActor : ReceiveActor {
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        public PlaybackStatisitcsActor() {
+            Context.ActorOf<MoviePlayCounterActor>("playsCounter");
+        }
 
 
         protected override void PreStart() {

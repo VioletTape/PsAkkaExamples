@@ -8,7 +8,7 @@ namespace SimpleHierarchyActors.Actors {
 
         public PlaybackActor() {
             Context.ActorOf<UserCoordinatorActor>("userCoordinator");
-            Context.ActorOf<PlaybackStatisitcsActor>("playback");
+            Context.ActorOf<PlaybackStatisitcsActor>("playbackStatistics");
         }
 
 

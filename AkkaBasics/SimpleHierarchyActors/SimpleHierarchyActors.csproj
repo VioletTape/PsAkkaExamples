@@ -60,10 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\MoviePlayCounterActor.cs" />
     <Compile Include="Actors\PlaybackActor.cs" />
     <Compile Include="Actors\PlaybackStatisitcsActor.cs" />
     <Compile Include="Actors\UserActor.cs" />
     <Compile Include="Actors\UserCoordinatorActor.cs" />
+    <Compile Include="Messages\IncrementMoviePlayMessage.cs" />
     <Compile Include="Messages\PlayMovieMessage.cs" />
     <Compile Include="Messages\StopMovieMessage.cs" />
     <Compile Include="Program.cs" />
