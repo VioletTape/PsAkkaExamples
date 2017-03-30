@@ -1,15 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Akka.Actor;
+using NLog;
+using NLog.Config;
+using SimpleHierarchyActors.Actors;
 
-namespace SimpleHierarchyActors
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
+namespace SimpleHierarchyActors {
+    internal class Program {
+        private static void Main(string[] args) {
+            LogManager.Configuration = new XmlLoggingConfiguration("NLog.config", true);
+
+            var asMoviewStore = ActorSystem.Create("MovieStore");
+
+            var playbackActor = asMoviewStore.ActorOf<PlaybackActor>("playback");
+
+            Console.ReadLine();
+
+            asMoviewStore.Terminate();
+
+            Console.WriteLine("Press Enter to exit.");
+            Console.ReadLine();
         }
     }
 }

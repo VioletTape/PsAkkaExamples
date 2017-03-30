@@ -12,8 +12,4 @@
             return Id + ": " + Name;
         }
     }
-
-    public class StopMovieMessage {
-        
-    }
 }

@@ -63,6 +63,7 @@
     <Compile Include="Actors\UserActorState.cs" />
     <Compile Include="Actors\UserActor.cs" />
     <Compile Include="Messages\PlayMovieMessage.cs" />
+    <Compile Include="Messages\StopMovieMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
