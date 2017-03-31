@@ -4,7 +4,7 @@ using Akka.Actor;
 using NLog;
 using SimpleHierarchyActors.Messages;
 
-namespace SimpleHierarchyActors.Actors {
+namespace SimpleHierarchyErrorHangling.Actors {
     public class MoviePlayCounterActor : ReceiveActor {
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
         private Dictionary<string, int> counter = new Dictionary<string, int>();

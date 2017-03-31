@@ -2,10 +2,10 @@
 using Akka.Actor;
 using NLog;
 using NLog.Config;
-using SimpleHierarchyActors.Actors;
 using SimpleHierarchyActors.Messages;
+using SimpleHierarchyErrorHangling.Actors;
 
-namespace SimpleHierarchyActors {
+namespace SimpleHierarchyErrorHangling {
     internal class Program {
         private static void Main(string[] args) {
             LogManager.Configuration = new XmlLoggingConfiguration("NLog.config", true);

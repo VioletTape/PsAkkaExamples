@@ -2,7 +2,7 @@
 using Akka.Actor;
 using NLog;
 
-namespace SimpleHierarchyActors.Actors {
+namespace SimpleHierarchyErrorHangling.Actors {
     public class PlaybackActor : ReceiveActor {
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using Akka.Actor;
 using NLog;
-using SimpleHierarchyActors.Messages;
 
-namespace SimpleHierarchyActors.Actors {
+namespace SimpleHierarchyErrorHangling.Actors {
     public class PlaybackStatisitcsActor : ReceiveActor {
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 

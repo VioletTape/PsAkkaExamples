@@ -65,6 +65,8 @@
     <Compile Include="Actors\PlaybackStatisitcsActor.cs" />
     <Compile Include="Actors\UserActor.cs" />
     <Compile Include="Actors\UserCoordinatorActor.cs" />
+    <Compile Include="Exceptions\CorruptStateException.cs" />
+    <Compile Include="Exceptions\TerribleException.cs" />
     <Compile Include="Messages\IncrementMoviePlayMessage.cs" />
     <Compile Include="Messages\PlayMovieMessage.cs" />
     <Compile Include="Messages\StopMovieMessage.cs" />

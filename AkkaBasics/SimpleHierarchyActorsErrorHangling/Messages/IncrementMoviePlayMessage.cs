@@ -4,5 +4,6 @@ namespace SimpleHierarchyActors.Messages {
         public IncrementMoviePlayMessage(string movieName) {
             MovieName = movieName;
         }
+
     }
 }
