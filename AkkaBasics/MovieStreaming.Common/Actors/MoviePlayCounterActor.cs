@@ -28,7 +28,6 @@ namespace MovieStreaming.Common.Actors {
             if (counter[message.MovieName] >= 3) {
                 throw new CorruptStateException();
             }
-
             logger.Info("{0} played {1} times", message.MovieName, counter[message.MovieName]);
         }
 
