@@ -21,13 +21,13 @@ namespace SimpleHierarchyActors {
 
                 if (command.StartsWith("play")) {
                     movieStore.ActorSelection("/user/playback/userCoordinator")
-                        .Tell(new PlayMovieMessage(int.Parse(myArgs[1]), myArgs[2]));
+                              .Tell(new PlayMovieMessage(int.Parse(myArgs[1]), myArgs[2]));
                     movieStore.ActorSelection("/user/playback/playbackStatistics/playsCounter")
-                        .Tell(new IncrementMoviePlayMessage(myArgs[2]));
+                              .Tell(new IncrementMoviePlayMessage(myArgs[2]));
                 }
                 if (command.StartsWith("stop"))
                     movieStore.ActorSelection("/user/playback/userCoordinator")
-                        .Tell(new StopMovieMessage(int.Parse(myArgs[1])));
+                              .Tell(new StopMovieMessage(int.Parse(myArgs[1])));
 
                 if (command.StartsWith("exit")) {
                     var task = movieStore.Terminate();
