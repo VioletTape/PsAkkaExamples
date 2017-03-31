@@ -1,6 +1,7 @@
 ﻿using System;
 using Akka.Actor;
 using NLog;
+using SimpleHierarchyErrorHangling.Exceptions;
 
 namespace SimpleHierarchyErrorHangling.Actors {
     public class PlaybackStatisitcsActor : ReceiveActor {
@@ -10,6 +11,19 @@ namespace SimpleHierarchyErrorHangling.Actors {
             Context.ActorOf<MoviePlayCounterActor>("playsCounter");
         }
 
+        protected override SupervisorStrategy SupervisorStrategy() {
+            return new OneForOneStrategy(e => {
+                                             if (e is TerribleMovieException) {
+                                                 // resume actor to process next message 
+                                                 return Directive.Resume;
+                                             }
+
+                                             if (e is CorruptStateException)
+                                                 return Directive.Restart;
+
+                                             return Directive.Resume;
+                                         });
+        }
 
         protected override void PreStart() {
             logger.Trace("PreStart hook");
@@ -20,15 +34,15 @@ namespace SimpleHierarchyErrorHangling.Actors {
         }
 
         protected override void PreRestart(Exception reason, object message) {
-            logger.Trace("PreRestart hook");
-            logger.Trace("PreRestart reason: " + reason.Message);
+            logger.Error("PreRestart hook");
+            logger.Error("PreRestart reason: " + reason.Message);
 
             base.PreRestart(reason, message);
         }
 
         protected override void PostRestart(Exception reason) {
-            logger.Trace("PostRestart hook");
-            logger.Trace("PostRestart reason: " + reason.Message);
+            logger.Error("PostRestart hook");
+            logger.Error("PostRestart reason: " + reason.Message);
 
             base.PostRestart(reason);
         }

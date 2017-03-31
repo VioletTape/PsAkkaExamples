@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Akka.Actor;
 using NLog;
 using SimpleHierarchyActors.Messages;
+using SimpleHierarchyErrorHangling.Exceptions;
 
 namespace SimpleHierarchyErrorHangling.Actors {
     public class MoviePlayCounterActor : ReceiveActor {
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
-        private Dictionary<string, int> counter = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> counter = new Dictionary<string, int>();
 
 
         public MoviePlayCounterActor() {
@@ -15,37 +16,40 @@ namespace SimpleHierarchyErrorHangling.Actors {
         }
 
         private void _(IncrementMoviePlayMessage message) {
-            if (counter.ContainsKey(message.MovieName)) {
+            if (counter.ContainsKey(message.MovieName))
                 counter[message.MovieName] += 1;
-            }
-            else {
+            else
                 counter.Add(message.MovieName, 1);
+
+            if (message.MovieName == "superman") {
+                throw new TerribleMovieException();
             }
+
+            if (counter[message.MovieName] >= 3) {
+                throw new CorruptStateException();
+            }
+
             logger.Info("{0} played {1} times", message.MovieName, counter[message.MovieName]);
         }
 
-        protected override void PreStart()
-        {
+        protected override void PreStart() {
             logger.Trace("PreStart hook");
         }
 
-        protected override void PostStop()
-        {
+        protected override void PostStop() {
             logger.Trace("PostStop hook");
         }
 
-        protected override void PreRestart(Exception reason, object message)
-        {
-            logger.Trace("PreRestart hook");
-            logger.Trace("PreRestart reason: " + reason.Message);
+        protected override void PreRestart(Exception reason, object message) {
+            logger.Error("PreRestart hook");
+            logger.Error("PreRestart reason: " + reason.Message);
 
             base.PreRestart(reason, message);
         }
 
-        protected override void PostRestart(Exception reason)
-        {
-            logger.Trace("PostRestart hook");
-            logger.Trace("PostRestart reason: " + reason.Message);
+        protected override void PostRestart(Exception reason) {
+            logger.Error("PostRestart hook");
+            logger.Error("PostRestart reason: " + reason.Message);
 
             base.PostRestart(reason);
         }

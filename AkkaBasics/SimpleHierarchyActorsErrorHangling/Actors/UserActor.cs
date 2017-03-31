@@ -2,6 +2,7 @@
 using Akka.Actor;
 using NLog;
 using SimpleHierarchyActors.Messages;
+using SimpleHierarchyErrorHangling.Exceptions;
 
 namespace SimpleHierarchyErrorHangling.Actors {
     public class UserActor : ReceiveActor {
@@ -14,6 +15,8 @@ namespace SimpleHierarchyErrorHangling.Actors {
         }
 
         private void _(PlayMovieMessage message) {
+            
+
             if (currentlyWatching != null) {
                 logger.Warn("User {0} already watching movie", message.UserId);
             }
