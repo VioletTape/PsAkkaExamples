@@ -1,15 +1,23 @@
 ﻿using System;
 using Akka.Actor;
+using Akka.DI.StructureMap;
 using AkkaDIs.Actors;
 using AkkaDIs.Messages;
-using NLog;
-using NLog.Config;
+using AkkaDIs.Services;
+using StructureMap;
 
-namespace AkkaDIs
-{
+namespace AkkaDIs {
     internal class Program {
         private static void Main(string[] args) {
+            var container = new Container();
+            container.Configure(_ =>
+                                    _.For<IService>().Use<Service>()
+                                    );
+
             var movieStore = ActorSystem.Create("MovieStore");
+
+            new StructureMapDependencyResolver(container, movieStore);
+
             movieStore.ActorOf<PlaybackActor>("playback");
 
             Console.WriteLine("Available commands:\n\tplay -<userId> -<movie name>\n\tstop -<userId>\n\texit");

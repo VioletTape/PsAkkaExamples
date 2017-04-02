@@ -1,5 +1,6 @@
 ﻿using System;
 using Akka.Actor;
+using Akka.DI.Core;
 using Akka.Event;
 using AkkaDIs.Exceptions;
 
@@ -8,7 +9,8 @@ namespace AkkaDIs.Actors {
         private readonly ILoggingAdapter logger = Context.GetLogger();
 
         public PlaybackStatisitcsActor() {
-            Context.ActorOf<MoviePlayCounterActor>("playsCounter");
+//            Context.ActorOf<MoviePlayCounterActor>("playsCounter");
+            Context.ActorOf(Context.DI().Props<MoviePlayCounterActor>(),"playsCounter");
         }
 
         protected override SupervisorStrategy SupervisorStrategy() {

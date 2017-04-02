@@ -4,6 +4,7 @@ using Akka.Actor;
 using Akka.Event;
 using AkkaDIs.Exceptions;
 using AkkaDIs.Messages;
+using AkkaDIs.Services;
 
 namespace AkkaDIs.Actors {
     public class MoviePlayCounterActor : ReceiveActor {
@@ -11,7 +12,10 @@ namespace AkkaDIs.Actors {
         private readonly Dictionary<string, int> counter = new Dictionary<string, int>();
 
 
-        public MoviePlayCounterActor() {
+        public MoviePlayCounterActor(IService service) {
+            if (service == null) {
+                throw new NullReferenceException();
+            }
             Receive<IncrementMoviePlayMessage>(m => _(m));
         }
 
