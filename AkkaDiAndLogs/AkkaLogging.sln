@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26228.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLogExplicitUsage", "ExternalLogging\NLogExplicitUsage.csproj", "{AEC8EDE9-F308-4AF2-9A64-1E42D6623CDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkaNLog", "AkkaNLog\AkkaNLog.csproj", "{AD5C6145-D371-4242-8AE9-E4D509783629}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AEC8EDE9-F308-4AF2-9A64-1E42D6623CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEC8EDE9-F308-4AF2-9A64-1E42D6623CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEC8EDE9-F308-4AF2-9A64-1E42D6623CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD5C6145-D371-4242-8AE9-E4D509783629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD5C6145-D371-4242-8AE9-E4D509783629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD5C6145-D371-4242-8AE9-E4D509783629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD5C6145-D371-4242-8AE9-E4D509783629}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
