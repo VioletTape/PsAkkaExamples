@@ -58,7 +58,7 @@ namespace ActorModel.Tests {
                                                             {"Dark Knight", 10}
                                                         };
 
-            actor.Tell(new InitialStatisticsMesage(new ReadOnlyDictionary<string, int>(initStats)), TestActor);
+            actor.Tell(new InitialStatisticsMesage(new ReadOnlyDictionary<string, int>(initStats)));
 
             actor.UnderlyingActor.PlayCounts["Dark Knight"]
                  .Should()
