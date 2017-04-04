@@ -10,6 +10,7 @@ namespace AkkaNLog
         private static void Main(string[] args) {
             var logger = new LoggerConfiguration()
                     .MinimumLevel.Debug()
+                    .Enrich.WithProperty("Case", "1")
                     .WriteTo.Seq("http://localhost:5341")
                     .CreateLogger();
 

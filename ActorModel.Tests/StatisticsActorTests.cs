@@ -34,5 +34,35 @@ namespace ActorModel.Tests {
                  .Should()
                  .Be(10);
         }
+
+        [Test]
+        public void ShouldRecieveInitialStatisticMessage() {
+            var actor = ActorOf<StatisticsActor>();
+
+            var initStats = new Dictionary<string, int> {
+                                                            {"Dark Knight", 10}
+                                                        };
+
+            actor.Tell(new InitialStatisticsMesage(new ReadOnlyDictionary<string, int>(initStats)), TestActor);
+
+            // no such property and we have to use ActorOfAsTestActorRef
+            //actor.PlayCounts
+        }
+
+        [Test]
+        public void ShouldRecieveInitialStatisticMessageX()
+        {
+            var actor = ActorOfAsTestActorRef<StatisticsActor>();
+
+            var initStats = new Dictionary<string, int> {
+                                                            {"Dark Knight", 10}
+                                                        };
+
+            actor.Tell(new InitialStatisticsMesage(new ReadOnlyDictionary<string, int>(initStats)), TestActor);
+
+            actor.UnderlyingActor.PlayCounts["Dark Knight"]
+                 .Should()
+                 .Be(10);
+        }
     }
 }
