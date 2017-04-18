@@ -7,7 +7,7 @@ using FluentAssertions;
 using NUnit.Framework;
 
 namespace ActorModel.Tests {
-    public class StatisticsActorTests : TestKit{
+    public class StatisticsActorTests : TestKit {
         [Test]
         public void ShouldHaveInitialPlayCountValue() {
             var actor = new StatisticsActor();
@@ -25,8 +25,8 @@ namespace ActorModel.Tests {
             var actor = new StatisticsActor();
 
             var initStats = new Dictionary<string, int> {
-                                            {"Dark Knight", 10}
-                                        };
+                                                            {"Dark Knight", 10}
+                                                        };
 
             actor._(new InitialStatisticsMesage(new ReadOnlyDictionary<string, int>(initStats)));
 
@@ -50,8 +50,7 @@ namespace ActorModel.Tests {
         }
 
         [Test]
-        public void ShouldRecieveInitialStatisticMessageX()
-        {
+        public void ShouldRecieveInitialStatisticMessageX() {
             var actor = ActorOfAsTestActorRef<StatisticsActor>();
 
             var initStats = new Dictionary<string, int> {

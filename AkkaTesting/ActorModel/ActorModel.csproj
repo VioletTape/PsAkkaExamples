@@ -52,6 +52,7 @@
     <Compile Include="Actors\StatisticsActor.cs" />
     <Compile Include="Actors\UserActor.cs" />
     <Compile Include="Messages\InitialStatisticsMesage.cs" />
+    <Compile Include="Messages\NowPlayingMessage.cs" />
     <Compile Include="Messages\PlayMovieMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

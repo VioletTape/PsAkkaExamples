@@ -13,6 +13,7 @@ namespace ActorModel.Actors {
 
         private void _(PlayMovieMessage message) {
             CurrentlyPlaying = message.MovieTitle;
+            Sender.Tell(new NowPlayingMessage(CurrentlyPlaying));
         }
     }
 }
