@@ -1,6 +1,8 @@
 ﻿using ActorModel.Actors;
 using ActorModel.Messages;
+using Akka.Actor;
 using Akka.TestKit.NUnit;
+using Akka.TestKit.TestActors;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -68,6 +70,19 @@ namespace ActorModel.Tests {
             actor.Tell(new PlayMovieMessage("Batman"), TestActor);
 
             ExpectMsgFrom<NowPlayingMessage>(actor, msg => msg.CurrentlyPlaying.Should().Be("Batman"));
+        }
+
+        /// <summary>
+        ///     Testing logging features of akka
+        /// </summary>
+        [Test]
+        public void ShouldLogEvent() {
+            var actor = ActorOf(Props.Create(() => new UserActor(ActorOf(BlackHoleActor.Props))));
+
+            EventFilter.Info("Started playing Batman")
+                       .And
+                       .Info("Replying to sender")
+                       .Expect(2, () => actor.Tell(new PlayMovieMessage("Batman")));
         }
     }
 }
