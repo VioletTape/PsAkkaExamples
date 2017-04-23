@@ -4,9 +4,11 @@ using Akka.Actor;
 
 namespace ActorModel.Actors {
     public class StatisticsActor : ReceiveActor{
+        private readonly IActorRef databaseActor;
         public Dictionary<string, int> PlayCounts { get; set; }
 
-        public StatisticsActor() {
+        public StatisticsActor(IActorRef databaseActor) {
+            this.databaseActor = databaseActor;
             Receive<InitialStatisticsMesage>(m => _(m));
             Receive<string>(m => _(m));
         }
@@ -22,6 +24,11 @@ namespace ActorModel.Actors {
             else {
                 PlayCounts.Add(title, 1);
             }
+        }
+
+        protected override void PreStart() {
+            databaseActor.Tell(new GetInititalStatisticsMessage());
+            base.PreStart();
         }
     }
 }

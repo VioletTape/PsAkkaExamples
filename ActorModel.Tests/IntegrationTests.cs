@@ -5,6 +5,7 @@ using ActorModel.Actors;
 using ActorModel.Messages;
 using Akka.Actor;
 using Akka.TestKit.NUnit;
+using Akka.TestKit.TestActors;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -12,7 +13,7 @@ namespace ActorModel.Tests {
     public class IntegrationTests : TestKit {
         [Test]
         public void ShouldCountPlays() {
-            var statActor = ActorOfAsTestActorRef<StatisticsActor>();
+            var statActor = ActorOfAsTestActorRef<StatisticsActor>(() => new StatisticsActor(ActorOf(BlackHoleActor.Props)));
 
             var initStats = new Dictionary<string, int> {
                                                             {"Dark Knight", 10}

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using ActorModel.Actors;
 using ActorModel.Messages;
 using Akka.TestKit.NUnit;
+using Akka.TestKit.TestActors;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -10,7 +11,7 @@ namespace ActorModel.Tests {
     public class StatisticsActorTests : TestKit {
         [Test]
         public void ShouldHaveInitialPlayCountValue() {
-            var actor = new StatisticsActor();
+            var actor = new StatisticsActor(null);
 
             actor.PlayCounts
                  .Should()
@@ -22,7 +23,7 @@ namespace ActorModel.Tests {
             // This is DIRECT TEST of actor class
             // There is no actor system and we can't use any features like
             // stashing, sending, recieving messages
-            var actor = new StatisticsActor();
+            var actor = new StatisticsActor(null);
 
             var initStats = new Dictionary<string, int> {
                                                             {"Dark Knight", 10}
@@ -37,7 +38,7 @@ namespace ActorModel.Tests {
 
         [Test]
         public void ShouldRecieveInitialStatisticMessage() {
-            var actor = ActorOf<StatisticsActor>();
+            var actor = ActorOf(() => new StatisticsActor(ActorOf(BlackHoleActor.Props)));
 
             var initStats = new Dictionary<string, int> {
                                                             {"Dark Knight", 10}
@@ -51,7 +52,7 @@ namespace ActorModel.Tests {
 
         [Test]
         public void ShouldRecieveInitialStatisticMessageX() {
-            var actor = ActorOfAsTestActorRef<StatisticsActor>();
+            var actor = ActorOfAsTestActorRef(() => new StatisticsActor(ActorOf(BlackHoleActor.Props)));
 
             var initStats = new Dictionary<string, int> {
                                                             {"Dark Knight", 10}
@@ -66,7 +67,7 @@ namespace ActorModel.Tests {
 
         [Test]
         public void ShouldUpdatePlayCountStatistics() {
-            var actor = ActorOfAsTestActorRef<StatisticsActor>();
+            var actor = ActorOfAsTestActorRef<StatisticsActor>(() => new StatisticsActor(ActorOf(BlackHoleActor.Props)));
 
             var initStats = new Dictionary<string, int> {
                                                             {"Dark Knight", 10}
