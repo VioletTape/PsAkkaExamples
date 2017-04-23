@@ -63,5 +63,24 @@ namespace ActorModel.Tests {
                  .Should()
                  .Be(10);
         }
+
+        [Test]
+        public void ShouldUpdatePlayCountStatistics() {
+            var actor = ActorOfAsTestActorRef<StatisticsActor>();
+
+            var initStats = new Dictionary<string, int> {
+                                                            {"Dark Knight", 10}
+                                                        };
+
+            actor.Tell(new InitialStatisticsMesage(new ReadOnlyDictionary<string, int>(initStats)));
+
+            // act
+            actor.Tell("Dark Knight");
+
+            // arrange
+            actor.UnderlyingActor.PlayCounts["Dark Knight"]
+                 .Should()
+                 .Be(11);
+        }
     }
 }
