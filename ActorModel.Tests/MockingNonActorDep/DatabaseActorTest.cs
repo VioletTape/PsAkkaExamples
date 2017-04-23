@@ -3,6 +3,7 @@ using ActorModel.Actors;
 using ActorModel.Messages;
 using Akka.Actor;
 using Akka.TestKit.NUnit;
+using Akka.TestKit.TestActors;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -37,6 +38,21 @@ namespace ActorModel.Tests.MockingNonActorDep {
             recieved.PlayCounts["Batman"].Should().Be(100);
         }
 
+
+        /// <summary>
+        /// using handwritten mock actor that works in system
+        /// </summary>
+        [Test]
+        public void MockingActors()
+        {
+            // arrange
+            var mockDbActor = ActorOfAsTestActorRef<MockDatabaseActor>();
+
+            var actor = ActorOfAsTestActorRef(() => new StatisticsActor(mockDbActor));
+
+
+            actor.UnderlyingActor.PlayCounts["Batman"].Should().Be(100);
+        }
     }
 }
     

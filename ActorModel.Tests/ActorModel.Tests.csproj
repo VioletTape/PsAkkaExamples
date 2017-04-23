@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="MockingNonActorDep\DatabaseActorTest.cs" />
+    <Compile Include="MockingNonActorDep\MockDatabaseActor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatisticsActorTests.cs" />
     <Compile Include="UserActorTests.cs" />
