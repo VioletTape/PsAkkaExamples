@@ -49,8 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\DatabaseActor.cs" />
     <Compile Include="Actors\StatisticsActor.cs" />
     <Compile Include="Actors\UserActor.cs" />
+    <Compile Include="Messages\GetInititalStatisticsMessage.cs" />
     <Compile Include="Messages\InitialStatisticsMesage.cs" />
     <Compile Include="Messages\NowPlayingMessage.cs" />
     <Compile Include="Messages\PlayMovieMessage.cs" />
